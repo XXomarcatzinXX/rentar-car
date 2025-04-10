@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { Route, Router, RouteReuseStrategy } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,20 +17,28 @@ import { Route, Router, RouteReuseStrategy } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router) {
+  email = '';
+  password = '';
+  error = '';
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', [Validators.required]]
     });
   }
   login() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      console.log('Login con:', email, password);
-      // Aquí haces tu lógica de login (API, Firebase, etc.)
+      this.authService.login(email, password)
+        .then(() => {
+          this.router.navigate(['/dashboard']); // Redirige al layout
+        })
+        .catch(err => {
+          this.error = err.message;
+        });
     }
   }
-  ir(){
-    this.router.navigate(['dashboard.html'])
+  logout(){
+    this.authService.logout()
   }
 }
