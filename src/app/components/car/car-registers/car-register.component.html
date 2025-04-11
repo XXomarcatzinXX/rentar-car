@@ -24,7 +24,9 @@
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Año</mat-label>
         <input matInput type="number" placeholder="2020" formControlName="anio">
-        <mat-error *ngIf="carForm.get('anio')?.hasError('required')">Campo requerido</mat-error>
+        @if(carForm.get('anio')?.hasError('required')){
+            <mat-error>Campo requerido</mat-error>
+        }
       </mat-form-field>
   
       <!-- Tipo de seguro -->
@@ -35,14 +37,18 @@
           <mat-option value="limitado">Limitado</mat-option>
           <mat-option value="responsabilidad">Responsabilidad Civil</mat-option>
         </mat-select>
-        <mat-error *ngIf="carForm.get('tipoSeguro')?.hasError('required')">Campo requerido</mat-error>
+        @if (carForm.get('tipoSeguro')?.hasError('required')) {
+            <mat-error>Campo requerido</mat-error>
+        }
       </mat-form-field>
   
       <!-- Número de póliza -->
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Número de póliza</mat-label>
         <input matInput placeholder="Ej. GNP-123456" formControlName="poliza">
-        <mat-error *ngIf="carForm.get('poliza')?.hasError('required')">Campo requerido</mat-error>
+        @if(carForm.get('poliza')?.hasError('required')){
+            <mat-error>Campo requerido</mat-error>
+        }
       </mat-form-field>
   
       <!-- Botón de enviar -->
