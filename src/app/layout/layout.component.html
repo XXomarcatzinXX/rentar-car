@@ -3,6 +3,7 @@
   <div class="group relative bg-gray-800 text-white transition-all duration-300 ease-in-out"
     [class]="{ 'w-16': !isSidebarHovered, 'w-64': isSidebarHovered }" (mouseenter)="isSidebarHovered = true"
     (mouseleave)="isSidebarHovered = false">
+
     <!-- Logo -->
     <div class="h-16 flex items-center justify-center border-b border-gray-700">
       @if(isSidebarHovered){
@@ -15,6 +16,7 @@
 
     <!-- Menu -->
     <ul class="p-2 space-y-2">
+      <!-- Dashboard -->
       <a [routerLink]="['/dashboard']">
         <li class="flex items-center space-x-2 p-2 hover:bg-gray-700 rounded cursor-pointer">
           <span class="material-icons">dashboard</span>
@@ -23,23 +25,67 @@
           }
         </li>
       </a>
-      <li class="flex items-center space-x-2 p-2 hover:bg-gray-700 rounded cursor-pointer">
-        <span class="material-icons">settings</span>
-        @if(isSidebarHovered){
-        <span>Configuración</span>
+
+      <!-- Gestión de Vehículos -->
+      <li>
+        <div class="flex items-center justify-between p-2 hover:bg-gray-700 rounded cursor-pointer"
+          (click)="toggleSubMenu('vehiculos')">
+          <div class="flex items-center space-x-2">
+            <span class="material-icons">directions_car</span>
+            @if(isSidebarHovered){<span>Vehículos</span>}
+          </div>
+          @if(isSidebarHovered){
+          <span class="material-icons text-sm" [class]="{'rotate-90': openSubmenus['vehiculos']}">chevron_right</span>
+          }
+        </div>
+        @if(openSubmenus['vehiculos'] && isSidebarHovered){
+        <ul class="ml-8 space-y-1 text-sm">
+          <li><a [routerLink]="['/vehiculos/lista']" class="block p-1 hover:underline">Lista</a></li>
+          <li><a [routerLink]="['/vehiculos/mantenimiento']" class="block p-1 hover:underline">Mantenimiento</a></li>
+          <li><a [routerLink]="['/vehiculos/documentos']" class="block p-1 hover:underline">Documentos</a></li>
+        </ul>
         }
       </li>
+
+      <!-- Conductores -->
+      <li>
+        <div class="flex items-center justify-between p-2 hover:bg-gray-700 rounded cursor-pointer"
+          (click)="toggleSubMenu('conductores')">
+          <div class="flex items-center space-x-2">
+            <span class="material-icons">person</span>
+            @if(isSidebarHovered){<span>Conductores</span>}
+          </div>
+          @if(isSidebarHovered){
+          <span class="material-icons text-sm" [class]="{'rotate-90': openSubmenus['conductores']}">chevron_right</span>
+          }
+        </div>
+
+        @if(openSubmenus['conductores'] && isSidebarHovered){
+        <ul class="ml-8 space-y-1 text-sm">
+          <li><a [routerLink]="['/conductores/lista']" class="block p-1 hover:underline">Lista</a></li>
+          <li><a [routerLink]="['/conductores/documentos']" class="block p-1 hover:underline">Documentos</a></li>
+        </ul>
+
+        }
+      </li>
+
+      <!-- Configuración -->
+      <li class="flex items-center space-x-2 p-2 hover:bg-gray-700 rounded cursor-pointer">
+        <span class="material-icons">settings</span>
+        @if(isSidebarHovered){<span>Configuración</span>}
+      </li>
+
+      <!-- Logout -->
       <button (click)="logout()">
         <li class="flex items-center space-x-2 p-2 hover:bg-gray-700 rounded cursor-pointer">
           <span class="material-icons">logout</span>
-          @if(isSidebarHovered){
-          <span>Cerrar sesión</span>
-          }
+          @if(isSidebarHovered){<span>Cerrar sesión</span>}
         </li>
       </button>
     </ul>
   </div>
 
+  <!-- Main Content -->
   <div class="flex-1 bg-gray-100 p-4 overflow-auto">
     <router-outlet></router-outlet>
   </div>

@@ -10,9 +10,16 @@ import { AuthService } from '../services/auth.service';
 })
 export class LayoutComponent {
   isSidebarHovered = false;
+  openSubmenus: Record<string, any> = {
+    vehiculos: false,
+    conductores: false
+  };  
   constructor(private authService: AuthService){
   }
   logout(){
     this.authService.logout()
+  }
+  toggleSubMenu(menu: string) {
+    this.openSubmenus[menu] = !this.openSubmenus[menu];
   }
 }
