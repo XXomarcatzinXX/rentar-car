@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { fmdService } from '../../../services/fmd.service';
 
 @Component({
   selector: 'app-car-registers',
@@ -8,42 +9,39 @@ import { Router } from '@angular/router';
   templateUrl: './car-registers.component.html',
   styleUrl: './car-register.component.css'
 })
-export class CarRegistersComponent {
-  autos = [
-    {
-      model: 'Nissan Versa',
-      placas: 'ABC-123',
-      year: 2020,
-      tipoSeguro: 'Cobertura Amplia',
-      poliza: 'AXA-789456'
-    },
-    {
-      model: 'Chevrolet Aveo',
-      placas: 'XYZ-987',
-      year: 2019,
-      tipoSeguro: 'Limitado',
-      poliza: 'GNP-456321'
+export class CarRegistersComponent implements OnInit {
+
+
+  autos: any;
+
+  constructor(private router: Router, private fmd: fmdService) {
+
+  }
+  ngOnInit(): void {
+    this.dataCar()
+  }
+
+  async dataCar() {
+    await this.fmd.get('catalogs/carRecords', true).then((data) => {
+      this.autos = data
+    });
+  }
+
+  editarAuto(car: any): void {
+    if (car && car.id) {
+      console.log('Editando carro con ID:', car.id);
+      this.router.navigate(['/vehiculos/lista/registroCarro', car.id]);
+      this.autos = car
+    } else {
+      console.error('Carro no válido para editar:', car);
     }
-    // ...más autos
-  ];
-
-  constructor(private router:Router){
-
   }
 
-  editarAuto(auto: any) {
-    // lógica para editar
-  }
 
   eliminarAuto(auto: any) {
-    // lógica para eliminar
-  }
-  addCar() {
-
   }
 
-  register(){
-    console.log('entro por aqui')
+  register() {
     this.router.navigate(['/vehiculos/lista/registroCarro'])
   }
 
