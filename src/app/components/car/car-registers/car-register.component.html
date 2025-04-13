@@ -6,8 +6,8 @@
       <!-- Modelo -->
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Modelo</mat-label>
-        <input matInput placeholder="Ej. Nissan Versa" formControlName="modelo">
-        @if(carForm.get('modelo')?.hasError('required')){
+        <input matInput placeholder="Ej. Nissan Versa" formControlName="model">
+        @if(carForm.get('model')?.hasError('required')){
             <mat-error>Campo requerido</mat-error>
         }
       </mat-form-field>
@@ -23,8 +23,8 @@
       <!-- Año -->
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Año</mat-label>
-        <input matInput type="number" placeholder="2020" formControlName="anio">
-        @if(carForm.get('anio')?.hasError('required')){
+        <input matInput type="number" placeholder="2020" formControlName="year">
+        @if(carForm.get('year')?.hasError('required')){
             <mat-error>Campo requerido</mat-error>
         }
       </mat-form-field>
