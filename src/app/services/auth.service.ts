@@ -16,6 +16,8 @@ export class AuthService {
       .then((result) => {
         this.userData.next(result.user);
         this.router.navigate(['/dashboard']);
+      }).catch(() => {
+        throw new Error('Usuario o contraseña incorrectos');
       });
   }
 
