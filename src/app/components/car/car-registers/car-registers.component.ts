@@ -38,8 +38,13 @@ export class CarRegistersComponent implements OnInit {
   }
 
 
-  eliminarAuto(auto: any) {
+  async eliminarAuto(car: any) {
+    if (car) {
+      await this.fmd.delete(car.id, 'catalogs/carRecords');
+      await this.dataCar();
+    }
   }
+  
 
   register() {
     this.router.navigate(['/vehiculos/lista/registroCarro'])
