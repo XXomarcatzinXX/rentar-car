@@ -6,7 +6,7 @@
     <!-- Modelo -->
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Modelo</mat-label>
-      <input matInput placeholder="Ej. Nissan Versa" formControlName="model" [(ngModel)]="car.model">
+      <input matInput placeholder="Ej. Nissan Versa" formControlName="model" >
       @if(carForm.get('model')?.hasError('required')){
       <mat-error>Campo requerido</mat-error>
       }
@@ -14,7 +14,7 @@
     <!-- Placas -->
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Placas</mat-label>
-      <input matInput placeholder="Ej. ABC-1234" formControlName="placas" [(ngModel)]="car.placas">
+      <input matInput placeholder="Ej. ABC-1234" formControlName="placas">
       @if(carForm.get('placas')?.hasError('required')){
       <mat-error>Campo requerido</mat-error>
       }
@@ -23,7 +23,7 @@
     <!-- Año -->
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Año</mat-label>
-      <input matInput type="number" placeholder="2020" formControlName="year" [(ngModel)]="car.year">
+      <input matInput type="number" placeholder="2020" formControlName="year">
       @if(carForm.get('year')?.hasError('required')){
       <mat-error>Campo requerido</mat-error>
       }
@@ -32,7 +32,7 @@
     <!-- Tipo de seguro -->
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Tipo de Seguro</mat-label>
-      <mat-select formControlName="tipoSeguro" [(ngModel)]="car.tipoSeguro">
+      <mat-select formControlName="tipoSeguro">
         <mat-option value="amplio">Cobertura Amplia</mat-option>
         <mat-option value="limitado">Limitado</mat-option>
         <mat-option value="responsabilidad">Responsabilidad Civil</mat-option>
@@ -45,15 +45,20 @@
     <!-- Número de póliza -->
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Número de póliza</mat-label>
-      <input matInput placeholder="Ej. GNP-123456" formControlName="poliza" [(ngModel)]="car.poliza">
+      <input matInput placeholder="Ej. GNP-123456" formControlName="poliza">
       @if(carForm.get('poliza')?.hasError('required')){
       <mat-error>Campo requerido</mat-error>
       }
     </mat-form-field>
 
-    <!-- Botón de enviar -->
-    <button mat-flat-button color="primary" class="w-full py-2" type="submit" [disabled]="carForm.invalid">
-      Registrar auto
-    </button>
+     @if(car){
+      <button mat-flat-button color="primary" class="w-full py-2" (click)="edit()"  [disabled]="carForm.invalid">
+        Editar auto
+      </button>
+     }@else {
+       <button mat-flat-button color="primary" class="w-full py-2" type="submit" [disabled]="carForm.invalid">
+         Registrar auto
+       </button>
+     }
   </form>
 </div>

@@ -65,7 +65,7 @@ export class fmdService {
     });
   }
 
-  async update(id: string, data: any, path: string): Promise<void> {
+  async update(id: any, data: any, path: string): Promise<void> {
     if (!this.uid) throw new Error('Usuario no autenticado');
     const autoRef = ref(this.db, `${path}/${id}`);
     await update(autoRef, data);

@@ -35,14 +35,27 @@ export class CarRegisterComponent implements OnInit {
   }
 
 
- async dataCar() {
+  async dataCar() {
     const id = this.url.snapshot.paramMap.get('id');
     const data = await this.fmd.get('catalogs/carRecords/' + id, false);
-    this.car = data
+    this.car = data;
+    this.carForm.patchValue(this.car);
     console.log(this.car)
   }
 
+  async edit() {
+    const id = this.url.snapshot.paramMap.get('id');
+    if (this.carForm.valid) {
+      const formData = this.carForm.value;
+      try {
+        this.fmd.update(id, formData, 'catalogs/carRecords'),
+          this.router.navigate(['vehiculos/lista'])
+      } catch (error) {
+        console.error('Error al guardar en Firebase:', error);
+      }
+    }
 
+  }
 
 
 
