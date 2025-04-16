@@ -16,7 +16,7 @@ import { DialogComponent } from './dialog.component';
 
 @Component({
   selector: 'app-car-registers',
-  imports: [MatIconModule, MatIconModule, MatDividerModule, MatButtonModule, DialogComponent],
+  imports: [MatIconModule, MatIconModule, MatDividerModule, MatButtonModule],
   templateUrl: './car-registers.component.html',
   styleUrl: './car-register.component.css'
 })
