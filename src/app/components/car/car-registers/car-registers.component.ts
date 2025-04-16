@@ -1,11 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { fmdService } from '../../../services/fmd.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { DialogComponent } from './dialog.component';
 
 @Component({
   selector: 'app-car-registers',
-  imports: [MatIconModule],
+  imports: [MatIconModule, MatIconModule, MatDividerModule, MatButtonModule, DialogComponent],
   templateUrl: './car-registers.component.html',
   styleUrl: './car-register.component.css'
 })
@@ -13,7 +24,7 @@ export class CarRegistersComponent implements OnInit {
 
 
   autos: any;
-
+  readonly dialog = inject(MatDialog);
   constructor(private router: Router, private fmd: fmdService) {
 
   }
@@ -22,9 +33,7 @@ export class CarRegistersComponent implements OnInit {
   }
 
   async dataCar() {
-    await this.fmd.get('catalogs/carRecords', true).then((data) => {
-      this.autos = data
-    });
+    this.autos = await this.fmd.get('catalogs/carRecords', true)
   }
 
   editarAuto(car: any): void {
@@ -37,17 +46,22 @@ export class CarRegistersComponent implements OnInit {
     }
   }
 
+  register() {
+    this.router.navigate(['/vehiculos/lista/registroCarro'])
+  }
 
-  async eliminarAuto(car: any) {
-    if (car) {
+  async openDialog(car: any) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '300px',
+      data: car
+    });
+    const confirm = await dialogRef.afterClosed().toPromise();
+    if (confirm) {
       await this.fmd.delete(car.id, 'catalogs/carRecords');
       await this.dataCar();
     }
   }
-  
 
-  register() {
-    this.router.navigate(['/vehiculos/lista/registroCarro'])
-  }
+
 
 }

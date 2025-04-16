@@ -1,1 +1,50 @@
-<p>dashboard works!</p>
+<!-- Dashboard Cards + Gráficas - Angular 19 + Tailwind CSS + Angular Material + ng2-charts -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6 min-h-screen">
+
+    <!-- Card Template -->
+    <div
+        class="bg-white rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl p-5">
+        <div class="text-sm text-gray-500 mb-2">Vehículos activos</div>
+        <div class="text-3xl font-bold text-blue-600">24</div>
+    </div>
+
+    <div
+        class="bg-white rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl p-5">
+        <div class="text-sm text-gray-500 mb-2">Conductores registrados</div>
+        <div class="text-3xl font-bold text-blue-600">12</div>
+    </div>
+
+    <div
+        class="bg-white rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl p-5">
+        <div class="text-sm text-gray-500 mb-2">Ingresos del mes</div>
+        <div class="text-3xl font-bold text-green-600">$124,500</div>
+    </div>
+
+    <div
+        class="bg-white rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl p-5">
+        <div class="text-sm text-gray-500 mb-2">Autos en mantenimiento</div>
+        <div class="text-3xl font-bold text-yellow-500">3</div>
+    </div>
+
+    <!-- Alertas activas -->
+    <div
+        class="col-span-1 md:col-span-2 bg-white rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-[1.01] hover:shadow-xl p-5">
+        <div class="text-lg font-semibold text-red-600 mb-3">⚠️ Alertas</div>
+        <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+            <li>Seguro de Toyota Corolla vence en 3 días</li>
+            <li>Mantenimiento pendiente para Nissan Versa</li>
+            <li>Pago vencido del cliente Juan Pérez</li>
+        </ul>
+    </div>
+
+    <!-- Actividad reciente -->
+    <div
+        class="col-span-1 md:col-span-2 bg-white rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-[1.01] hover:shadow-xl p-5">
+        <div class="text-lg font-semibold text-blue-600 mb-3">🕒 Actividad Reciente</div>
+        <ul class="text-sm text-gray-700 space-y-1">
+            <li>✅ Pago recibido de Ana Gómez – $2,500</li>
+            <li>🔧 Mantenimiento registrado para Versa</li>
+            <li>📄 Documento actualizado de licencia de Pedro</li>
+        </ul>
+    </div>
+</div>
